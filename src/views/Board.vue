@@ -10,7 +10,8 @@
       calculate-widths
       no-results-text
       show-select
-      v-on:item-selected="handleSelection"
+      @item-selected="handleSelection"
+      @toggle-select-all="selectAll"
       @dblclick:row="dblclickRow"
     >
       <template v-slot:top>
@@ -78,7 +79,6 @@ export default {
       search: '',
       pointviews: '',
       contentId: '',
-      selected: [],
       notices: notices,
     };
   },
@@ -123,12 +123,17 @@ export default {
       });
     },
     handleSelection(object) {
+      const index = this.notices.findIndex((notice) => notice.title === object.item.title);
       if (object.value) {
-        this.selected.push(object.item);
+        this.notices[index].checked = true;
       } else {
-        const index = this.selected.findIndex((item) => item.title === object.item.title);
-        this.selected.splice(index, 1);
+        this.notices[index].checked = false;
       }
+    },
+    selectAll() {
+      this.notices.forEach((element) => {
+        element.checked = true;
+      });
     },
     dblclickRow(object, row) {
       const index = this.notices.findIndex((notice) => notice.title === row.item.title);
@@ -137,7 +142,8 @@ export default {
       });
     },
     deleteContent() {
-      alert('deleteContent');
+      let newArray = this.notices.filter((notice) => !notice.checked);
+      this.notices = newArray;
     },
     getColor(pointviews) {
       if (pointviews > 10) return 'red';
