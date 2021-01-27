@@ -67,6 +67,7 @@
 import notices from '../data/notice';
 export default {
   mounted() {
+    this.$store.state.screenName = 'Write';
     this.pContentId = this.$route.params.contentId;
     if (this.pContentId !== undefined) {
       const selectedItem = this.notices[this.pContentId];

@@ -41,6 +41,18 @@ const routes = [
     component: () => import(/* webpackChunkName: "write" */ '../views/Write.vue'),
     props: true,
   },
+  {
+    path: '/userList',
+    name: 'UserList',
+    component: () => import(/* webpackChunkName: "userList" */ '../views/UserList.vue'),
+    props: true,
+  },
+  {
+    path: '/user',
+    name: 'User',
+    component: () => import(/* webpackChunkName: "user" */ '../views/User.vue'),
+    props: true,
+  },
 ];
 
 const router = new VueRouter({

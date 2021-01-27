@@ -32,6 +32,9 @@
 
 <script>
 export default {
+  mounted() {
+    this.$store.state.screenName = 'Log In';
+  },
   data() {
     return {
       show1: false,

@@ -55,6 +55,11 @@
     </v-app-bar>
 
     <v-main app>
+      <v-container>
+        <div class="headline mb-1">
+          {{ $store.state.screenName }}
+        </div>
+      </v-container>
       <router-view></router-view>
     </v-main>
 
@@ -97,6 +102,7 @@ export default {
         { title: 'Photos', icon: 'mdi-image', link: '/photo' },
         { title: 'About', icon: 'mdi-help-box', link: '/about' },
         { title: 'Notice Board', icon: 'mdi-note-text', link: '/board' },
+        { title: 'User List', icon: 'mdi-account-multiple', link: '/userList' },
       ],
       right: null,
       icons: ['mdi-facebook', 'mdi-twitter', 'mdi-linkedin', 'mdi-instagram'],

@@ -1,3 +1,4 @@
+/* eslint-disable */
 <template>
   <v-container>
     <v-data-table
@@ -74,6 +75,9 @@
 <script>
 import notices from '../data/notice';
 export default {
+  mounted() {
+    this.$store.state.screenName = 'Board';
+  },
   data() {
     return {
       search: '',

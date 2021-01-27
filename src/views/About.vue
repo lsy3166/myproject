@@ -1,5 +1,5 @@
 <template>
-  <v-container fill-height fluid>
+  <v-container fluid>
     <v-card flat tile class="blue lighten-1 white--text text-center">
       <v-card-text>
         <v-btn v-for="icon in icons" :key="icon" class="mx-4 white--text" icon>
@@ -54,6 +54,9 @@
 
 <script>
 export default {
+  mounted() {
+    this.$store.state.screenName = 'About';
+  },
   data() {
     return {
       model: [],

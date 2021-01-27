@@ -1,5 +1,5 @@
 <template>
-  <v-container fill-height>
+  <v-container>
     <v-card class="mx-auto" max-width="1200" tile>
       <v-carousel>
         <v-carousel-item
@@ -16,6 +16,9 @@
 
 <script>
 export default {
+  mounted() {
+    this.$store.state.screenName = 'Photo';
+  },
   data() {
     return {
       items: [

@@ -12,7 +12,7 @@
             <v-container fluid>
               <v-sparkline
                 :fill="fill"
-                :gradient="gradient"
+                :gradient="gradients"
                 :line-width="width"
                 :padding="padding"
                 :smooth="radius || false"
@@ -254,14 +254,17 @@
 
 <script>
 const gradients = [
+  ['#f72047', '#ffd200', '#1feaea'],
+  ['red', 'orange', 'yellow'],
   ['#222'],
   ['#42b3f4'],
-  ['red', 'orange', 'yellow'],
   ['purple', 'violet'],
   ['#00c6ff', '#F0F', '#FF0'],
-  ['#f72047', '#ffd200', '#1feaea'],
 ];
 export default {
+  mounted() {
+    this.$store.state.screenName = 'Dashboard';
+  },
   data() {
     return {
       panel: [0, 1],
@@ -270,7 +273,7 @@ export default {
       show: false,
       reveal: false,
       fill: true,
-      selectedGradient: gradients[4],
+      selectedGradient: gradients[0],
       gradients,
       padding: 8,
       radius: 10,
