@@ -47,4 +47,12 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+::v-deep .v-data-table-header {
+  background-color: #ccc;
+}
+
+::v-deep th {
+  color: #000 !important;
+}
+</style>

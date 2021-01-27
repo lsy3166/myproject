@@ -5,6 +5,11 @@
         <v-icon>mdi-account</v-icon>
         <v-toolbar-title class="font-weight-light"> {{ user.name }}'s Profile </v-toolbar-title>
         <v-spacer></v-spacer>
+        <v-btn color="blue darken-3" fab small @click="moveUserList">
+          <v-icon>
+            mdi-account-multiple
+          </v-icon>
+        </v-btn>
         <v-btn color="blue darken-3" fab small @click="clickBtn">
           <v-icon v-if="isEditing">
             mdi-close
@@ -149,8 +154,11 @@ export default {
     clickBtn() {
       this.isEditing = !this.isEditing;
     },
+    moveUserList() {
+      this.$router.push({
+        path: '/userList',
+      });
+    },
   },
 };
 </script>
-
-<style></style>
