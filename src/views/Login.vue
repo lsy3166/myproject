@@ -1,6 +1,6 @@
 <template>
   <v-container fill-height>
-    <v-card class="mx-auto" min-width="800" tile>
+    <v-card class="mx-auto" max-width="800" width="80%" tile>
       <v-responsive :aspect-ratio="9 / 3">
         <v-alert
           text
@@ -39,7 +39,7 @@
             ></v-text-field>
           </v-col>
           <div class="text-center">
-            <v-btn rounded color="blue darken-5" width="300" dark @click="login">
+            <v-btn rounded color="blue darken-5" block dark @click="login">
               Log-In
             </v-btn>
           </div>
@@ -87,6 +87,7 @@ export default {
     ...mapState([
       'screenName',
       'users',
+      'username',
       'isLogin',
       'isLoginError',
       'successMsg',

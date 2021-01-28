@@ -14,6 +14,7 @@
       @item-selected="handleSelection"
       @toggle-select-all="selectAll"
       @dblclick:row="dblclickRow"
+      block
     >
       <template v-slot:top>
         <v-text-field
@@ -25,31 +26,6 @@
           @click:append-outer="write"
           clearable
         >
-          <template v-slot:append-outer>
-            <v-menu>
-              <template v-slot:activator="{ attrs }">
-                <v-btn depressed color="primary" v-bind="attrs" @click="write" style="margin:3px">
-                  <v-icon left>
-                    mdi-pencil
-                  </v-icon>
-                  작성
-                </v-btn>
-
-                <v-btn
-                  depressed
-                  color="error"
-                  v-bind="attrs"
-                  @click="deleteContent"
-                  style="margin:3px"
-                >
-                  <v-icon left>
-                    mdi-delete
-                  </v-icon>
-                  삭제
-                </v-btn>
-              </template>
-            </v-menu>
-          </template>
         </v-text-field>
       </template>
       <template v-slot:item.pointviews="{ item }">
@@ -58,13 +34,30 @@
         </v-chip>
       </template>
       <template v-slot:body.append>
-        <tr>
+        <tr v-if="isMobile === false">
           <td></td>
           <td></td>
           <td></td>
           <td></td>
           <td>
             <v-text-field v-model="pointviews" type="number" label="Less than"></v-text-field>
+          </td>
+        </tr>
+        <tr style="text-align:center">
+          <td colspan="5">
+            <v-btn depressed color="primary" @click="write" style="margin:3px">
+              <v-icon left>
+                mdi-pencil
+              </v-icon>
+              작성
+            </v-btn>
+
+            <v-btn depressed color="error" @click="deleteContent" style="margin:3px">
+              <v-icon left>
+                mdi-delete
+              </v-icon>
+              삭제
+            </v-btn>
           </td>
         </tr>
       </template>
@@ -74,6 +67,8 @@
 
 <script>
 import notices from '../data/notice';
+import { mapState } from 'vuex';
+
 export default {
   mounted() {
     this.$store.state.screenName = 'Board';
@@ -87,6 +82,7 @@ export default {
     };
   },
   computed: {
+    ...mapState(['isMobile']),
     headers() {
       return [
         {

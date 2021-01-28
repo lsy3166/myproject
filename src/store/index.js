@@ -8,6 +8,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     screenName: 'Home',
+    isMoblie: false,
     isLoginError: false,
     isLogin: false,
     errorMsg: null,
@@ -53,11 +54,14 @@ export default new Vuex.Store({
       state.username = '';
       state.email = '';
       // Token 제거
-      localStorage.clear();
+      //localStorage.clear();
       //if (this.$route.path === '/login') return;
       router.push({
         path: '/login',
       });
+    },
+    isMobile(state, isMobile) {
+      state.isMoblie = isMobile;
     },
   },
   actions: {
@@ -65,6 +69,7 @@ export default new Vuex.Store({
       //---------------------------------------------------------
       // 토근 관련
       //---------------------------------------------------------
+      /*
       let token = 'token_test';
       // Token 저장
       localStorage.setItem('access_token', token);
@@ -74,6 +79,7 @@ export default new Vuex.Store({
         headers: { 'access-token': token },
       };
       console.log(config);
+      */
 
       let users = state.users;
       let findUser = users.filter((user) => user.email === loginObj.email);

@@ -2,7 +2,7 @@ export default [
   {
     'title': 'Title1',
     'writer': 'writer1',
-    'content': 'content1',
+    'content': 'content1 content1 ontent1content1content1 content1 content1',
     'pointviews': 1,
   },
   {
