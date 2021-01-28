@@ -20,7 +20,12 @@
           <div class="py-4"></div>
           <v-icon v-text="'mdi-account'"></v-icon>
           <v-col cols="12" sm="6" md="12">
-            <v-text-field v-model="email" :label="'E - mail'" :rules="emailRules"></v-text-field>
+            <v-text-field
+              v-model="email"
+              :value="useremail"
+              :label="'E - mail'"
+              :rules="emailRules"
+            ></v-text-field>
           </v-col>
           <v-icon v-text="'mdi-lock'"></v-icon>
           <v-col cols="12" sm="6" md="12">
@@ -79,7 +84,15 @@ export default {
     };
   },
   computed: {
-    ...mapState(['screenName', 'users', 'isLogin', 'isLoginError', 'successMsg', 'errorMsg']),
+    ...mapState([
+      'screenName',
+      'users',
+      'isLogin',
+      'isLoginError',
+      'successMsg',
+      'errorMsg',
+      'useremail',
+    ]),
   },
   methods: {
     // Shanna@melissa.tv / 2

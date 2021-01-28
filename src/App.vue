@@ -43,7 +43,9 @@
 
       <v-spacer></v-spacer>
 
-      <v-toolbar-title v-if="isLogin"> {{ username }} 님 환영합니다. </v-toolbar-title>
+      <v-toolbar-title v-if="isLogin" class="blue--text">
+        {{ username }} 님 환영합니다.
+      </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn icon>
         <v-icon color="green darken-2" @click="moveHome">mdi-home</v-icon>
@@ -88,7 +90,7 @@
             <v-btn>
               <span>Recents</span>
 
-              <v-icon>mdi-history</v-icon>
+              <v-icon @click="$router.go(-1)">mdi-history</v-icon>
             </v-btn>
 
             <v-btn>

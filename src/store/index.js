@@ -14,6 +14,7 @@ export default new Vuex.Store({
     successMsg: null,
     user: '',
     username: '',
+    useremail: '',
     users: [],
   },
   mutations: {
@@ -27,6 +28,9 @@ export default new Vuex.Store({
     },
     mu_userName(state, username) {
       state.username = username;
+    },
+    mu_userEmail(state, useremail) {
+      state.useremail = useremail;
     },
     mu_modifyUser(state, { user, index }) {
       state.users[index].name = user.name;
@@ -47,6 +51,9 @@ export default new Vuex.Store({
       state.isLogin = false;
       state.isLoginError = false;
       state.username = '';
+      state.email = '';
+      // Token 제거
+      localStorage.clear();
       //if (this.$route.path === '/login') return;
       router.push({
         path: '/login',
@@ -55,10 +62,24 @@ export default new Vuex.Store({
   },
   actions: {
     ac_login({ state, commit }, loginObj) {
+      //---------------------------------------------------------
+      // 토근 관련
+      //---------------------------------------------------------
+      let token = 'token_test';
+      // Token 저장
+      localStorage.setItem('access_token', token);
+      // Token 취득
+      token = localStorage.getItem('access_token');
+      let config = {
+        headers: { 'access-token': token },
+      };
+      console.log(config);
+
       let users = state.users;
       let findUser = users.filter((user) => user.email === loginObj.email);
       commit('mu_userName', findUser[0].username);
-      console.log('userName : ' + state.username);
+      commit('mu_userEmail', findUser[0].useremail);
+      console.log('useremail : ' + state.useremail);
       if (findUser == 0) {
         commit('mu_loginFail');
         state.errorMsg = '등록된 email이 존재하지 않습니다.';
