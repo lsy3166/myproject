@@ -23,7 +23,13 @@
 
           <v-list-item-content>
             <v-list-item-title>
-              <router-link :to="item.link">{{ item.title }}</router-link>
+              <router-link :to="item.link" v-if="isLogin">{{ item.title }}</router-link>
+              <router-link
+                :to="item.link"
+                v-else-if="item.title == 'About' || item.title == 'User List'"
+                >{{ item.title }}</router-link
+              >
+              <span v-else>{{ item.title }}</span>
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -37,21 +43,26 @@
 
       <v-spacer></v-spacer>
 
+      <v-toolbar-title v-if="isLogin"> {{ username }} 님 환영합니다. </v-toolbar-title>
+      <v-spacer></v-spacer>
       <v-btn icon>
         <v-icon color="green darken-2" @click="moveHome">mdi-home</v-icon>
       </v-btn>
 
       <v-btn icon>
-        <v-icon color="blue darken-2" @click="moveLogin">mdi-account</v-icon>
+        <v-icon v-if="isLogin" color="blue darken-2" @click="mu_loginOut"
+          >mdi-account-circle</v-icon
+        >
+        <v-icon v-else color="blue darken-2" @click="moveLogin">mdi-account-circle-outline</v-icon>
       </v-btn>
 
-      <v-btn icon>
+      <!-- <v-btn icon>
         <v-icon color="red darken-2">mdi-heart</v-icon>
       </v-btn>
 
       <v-btn icon>
         <v-icon>mdi-magnify</v-icon>
-      </v-btn>
+      </v-btn> -->
     </v-app-bar>
 
     <v-main app>
@@ -62,7 +73,7 @@
         <v-card class="overflow-hidden" color="blue lighten-1" dark>
           <v-toolbar flat color="blue">
             <v-toolbar-title class="font-weight-light">
-              {{ $store.state.screenName }}
+              {{ screenName }}
             </v-toolbar-title>
           </v-toolbar>
         </v-card>
@@ -100,6 +111,7 @@
 </template>
 
 <script>
+import { mapMutations, mapState } from 'vuex';
 export default {
   data() {
     return {
@@ -116,13 +128,19 @@ export default {
       value: 1,
     };
   },
+  computed: {
+    ...mapState(['screenName', 'isLogin', 'username']),
+  },
   methods: {
+    ...mapMutations(['mu_loginOut']),
     moveHome() {
+      if (this.$route.path === '/') return;
       this.$router.push({
         path: '/',
       });
     },
     moveLogin() {
+      if (this.$route.path === '/login') return;
       this.$router.push({
         path: '/login',
       });
