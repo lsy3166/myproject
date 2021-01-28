@@ -87,7 +87,7 @@
 <script>
 export default {
   mounted() {
-    this.$store.state.screenName = '';
+    this.$store.state.screenName = 'User Information';
     const user = this.$store.state.user;
     this.name = user.name;
     this.username = user.username;

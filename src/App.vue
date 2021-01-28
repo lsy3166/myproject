@@ -56,9 +56,16 @@
 
     <v-main app>
       <v-container>
-        <div class="headline mb-1">
+        <!-- <div class="headline mb-1">
           {{ $store.state.screenName }}
-        </div>
+        </div> -->
+        <v-card class="overflow-hidden" color="blue lighten-1" dark>
+          <v-toolbar flat color="blue">
+            <v-toolbar-title class="font-weight-light">
+              {{ $store.state.screenName }}
+            </v-toolbar-title>
+          </v-toolbar>
+        </v-card>
       </v-container>
       <router-view></router-view>
     </v-main>
