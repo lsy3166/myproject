@@ -40,7 +40,7 @@
           </v-col>
           <div class="text-center">
             <v-btn rounded color="blue darken-5" block dark @click="login">
-              Log-In
+              Sign-In
             </v-btn>
           </div>
         </v-list>
