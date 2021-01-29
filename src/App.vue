@@ -57,6 +57,8 @@
         >
         <v-icon v-else color="blue darken-2" @click="moveLogin">mdi-account-circle-outline</v-icon>
       </v-btn>
+      <v-toolbar-title v-if="isLogin" @click="mu_loginOut">Log Out</v-toolbar-title>
+      <v-toolbar-title v-else @click="moveLogin">Log In</v-toolbar-title>
 
       <!-- <v-btn icon>
         <v-icon color="red darken-2">mdi-heart</v-icon>
