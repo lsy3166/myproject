@@ -19,7 +19,10 @@ new Vue({
     ) {
       store.commit('isMobile', true);
     }
-    console.log('isMoblie : ' + store.state.isMoblie);
+
+    //if (this.$store.state.users.length == 0) {
+    this.$store.commit('mu_setUsers');
+    //}
   },
   router,
   store,

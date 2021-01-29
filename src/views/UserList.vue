@@ -16,9 +16,6 @@
 export default {
   created() {
     this.$store.state.screenName = 'User List';
-    if (this.$store.state.users.length == 0) {
-      this.$store.commit('mu_setUsers');
-    }
   },
   data() {
     return {

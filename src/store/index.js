@@ -83,14 +83,13 @@ export default new Vuex.Store({
 
       let users = state.users;
       let findUser = users.filter((user) => user.email === loginObj.email);
-      commit('mu_userName', findUser[0].username);
-      commit('mu_userEmail', findUser[0].useremail);
-      console.log('useremail : ' + state.useremail);
       if (findUser == 0) {
         commit('mu_loginFail');
         state.errorMsg = '등록된 email이 존재하지 않습니다.';
       } else {
         if (loginObj.password && findUser[0].id == loginObj.password) {
+          commit('mu_userName', findUser[0].username);
+          commit('mu_userEmail', findUser[0].useremail);
           commit('mu_loginSuccess');
           state.successMsg = 'Sucess!!';
           router.push({ path: '/dashboard' });

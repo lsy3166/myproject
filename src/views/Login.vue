@@ -54,9 +54,6 @@ import { mapState } from 'vuex';
 export default {
   mounted() {
     this.$store.state.screenName = 'Log In';
-    if (this.$store.state.users.length == 0) {
-      this.$store.commit('mu_setUsers');
-    }
   },
   data() {
     return {
@@ -87,7 +84,6 @@ export default {
     ...mapState([
       'screenName',
       'users',
-      'username',
       'isLogin',
       'isLoginError',
       'successMsg',
