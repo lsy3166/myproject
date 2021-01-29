@@ -25,7 +25,13 @@
           append-outer-icon="mdi-pencil"
           @click:append-outer="write"
           clearable
+          @input="
+            (v) => {
+              search = v.toUpperCase();
+            }
+          "
         >
+          > >
         </v-text-field>
       </template>
       <template v-slot:item.pointviews="{ item }">
@@ -161,5 +167,9 @@ export default {
 
 ::v-deep th {
   color: #000 !important;
+}
+
+.my-input input {
+  text-transform: uppercase;
 }
 </style>
