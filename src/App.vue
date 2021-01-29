@@ -74,7 +74,7 @@
         </div> -->
         <v-card class="overflow-hidden" color="blue lighten-1" dark>
           <v-toolbar flat color="blue">
-            <v-toolbar-title class="font-weight-light"> ◎ {{ screenName }} </v-toolbar-title>
+            <v-toolbar-title class="font-weight-light"> ◎ {{ screenName }} Branch </v-toolbar-title>
           </v-toolbar>
         </v-card>
       </v-container>
