@@ -16,7 +16,7 @@
           {{ successMsg }}
         </v-alert>
         <v-list rounded>
-          <v-subheader dark class="blue darken-5 rounded subtitle-1">LOG IN</v-subheader>
+          <v-subheader dark class="blue darken-5 rounded subtitle-1">SING IN</v-subheader>
           <div class="py-4"></div>
           <v-icon v-text="'mdi-account'"></v-icon>
           <v-col cols="12" sm="6" md="12">
@@ -53,7 +53,7 @@
 import { mapState } from 'vuex';
 export default {
   mounted() {
-    this.$store.state.screenName = 'Log In';
+    this.$store.state.screenName = 'Sign In';
   },
   data() {
     return {
