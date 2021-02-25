@@ -20,7 +20,7 @@ module.exports = {
         semi: true,
         quoteProps: 'preserve',
         jsxSingleQuote: false,
-        trailingComma: 'es5',
+        trailingComma: 'none',
         arrowParens: 'always',
         endOfLine: 'auto',
         bracketSpacing: true,
