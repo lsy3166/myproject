@@ -5,6 +5,9 @@
         <v-icon>mdi-plus-box</v-icon> Add My Works
       </v-toolbar-title>
       <v-card-text class="pt-0 pb-10">
+        <v-alert dense outlined type="error" v-if="errorFlg">
+          {{ errorMsg }}
+        </v-alert>
         <v-text-field v-model="from" label="From" :rules="rules" hide-details="auto"></v-text-field>
         <v-text-field
           v-model="message"
@@ -45,12 +48,15 @@
             </v-menu>
           </v-col>
         </v-row>
-        <v-text-field
+        <!-- <v-text-field
           v-model="color"
           label="Color"
           :rules="rules"
           hide-details="auto"
-        ></v-text-field>
+        ></v-text-field> -->
+        <v-row justify="space-around" align="center">
+          <v-color-picker v-model="picker" flat></v-color-picker>
+        </v-row>
         <v-row justify="space-around" class="mt-3">
           <v-btn color="primary" @click="addTodo">
             Add
@@ -68,10 +74,13 @@ export default {
       from: '',
       message: '',
       color: '',
+      picker: null,
       time: null,
       time_ampm: null,
       menu2: false,
       modal2: false,
+      errorMsg: '',
+      errorFlg: false,
       rules: [
         (value) => !!value || 'Required.',
         (value) => (value && value.length >= 3) || 'Min 3 characters'
@@ -96,22 +105,38 @@ export default {
       var ampm = H < 12 || H === 24 ? 'am' : 'pm';
       timeString = h + timeString.substr(2, 3) + ampm;
       this.time_ampm = timeString;
+    },
+    picker(newValue) {
+      this.color = newValue.hexa;
     }
   },
   methods: {
     addTodo() {
-      this.$emit('add-work-list', {
-        from: this.from,
-        message: this.message,
-        time: this.time_ampm,
-        color: this.color,
-        checked: false
-      });
-      this.from = '';
-      this.message = '';
-      this.time = '';
-      this.time_ampm = '';
-      this.color = '';
+      this.errorMsg = this.checkValidation();
+      if (this.errorMsg == '') {
+        this.$emit('add-work-list', {
+          from: this.from,
+          message: this.message,
+          time: this.time_ampm,
+          color: this.color,
+          checked: false
+        });
+        this.from = '';
+        this.message = '';
+        this.time = '';
+        this.time_ampm = '';
+        this.color = '';
+        this.errorFlg = false;
+      } else {
+        this.errorFlg = true;
+      }
+    },
+    checkValidation() {
+      let errorMsg = '';
+      if (this.from == '' || this.message == '' || this.time == '' || this.color == '') {
+        errorMsg = '모든 항목 입력해 주세요!!';
+      }
+      return errorMsg;
     }
   }
 };

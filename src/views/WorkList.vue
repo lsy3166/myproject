@@ -134,8 +134,8 @@ export default {
     messages: [
       {
         from: 'You',
-        message: `Sure, I'll see you later.`,
-        time: '10:42am',
+        message: 'Did you still want to grab lunch today?',
+        time: '9:47am',
         color: 'deep-purple lighten-1',
         checked: false
       },
@@ -147,9 +147,16 @@ export default {
         checked: false
       },
       {
+        from: 'John Park',
+        message: 'Yeah, sure. Does 2:00pm work?',
+        time: '10:38am',
+        color: 'blue',
+        checked: false
+      },
+      {
         from: 'You',
-        message: 'Did you still want to grab lunch today?',
-        time: '9:47am',
+        message: `Sure, I'll see you later.`,
+        time: '10:42am',
         color: 'deep-purple lighten-1',
         checked: false
       }
@@ -176,6 +183,14 @@ export default {
         time: message.time,
         color: message.color
       });
+      this.messages // time별 정렬
+        .sort((m1, m2) => {
+          const ampm1 = m1.time.slice(-2);
+          const ampm2 = m2.time.slice(-2);
+          let m1time = m1.time.split(':')[0].length == 2 ? ampm1 + m1.time : ampm1 + '0' + m1.time;
+          let m2time = m2.time.split(':')[0].length == 2 ? ampm2 + m2.time : ampm2 + '0' + m2.time;
+          return m1time < m2time ? -1 : m1time > m2time ? 1 : 0;
+        });
       this.isShow = false;
       this.drawer = false;
     },
