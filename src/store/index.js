@@ -8,7 +8,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     screenName: 'Home',
-    isMoblie: false,
+    isMobile: false,
     isLoginError: false,
     isLogin: false,
     errorMsg: null,
@@ -16,7 +16,7 @@ export default new Vuex.Store({
     user: '',
     username: '',
     useremail: '',
-    users: [],
+    users: []
   },
   mutations: {
     mu_setUsers(state) {
@@ -57,12 +57,12 @@ export default new Vuex.Store({
       //localStorage.clear();
       //if (this.$route.path === '/login') return;
       router.push({
-        path: '/login',
+        path: '/login'
       });
     },
     isMobile(state, isMobile) {
-      state.isMoblie = isMobile;
-    },
+      state.isMobile = isMobile;
+    }
   },
   actions: {
     ac_login({ state, commit }, loginObj) {
@@ -98,7 +98,7 @@ export default new Vuex.Store({
           state.errorMsg = 'Password가 일치하지 않습니다.';
         }
       }
-    },
+    }
   },
-  modules: {},
+  modules: {}
 });

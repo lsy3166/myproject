@@ -74,7 +74,7 @@
         <!-- <div class="headline mb-1">
           {{ $store.state.screenName }}
         </div> -->
-        <v-card class="overflow-hidden" color="blue lighten-1" dark>
+        <v-card class="overflow-hidden" color="blue lighten-1" dark v-if="!isMobile">
           <v-toolbar flat color="blue">
             <v-toolbar-title class="font-weight-light"> ◎ {{ screenName }} </v-toolbar-title>
           </v-toolbar>
@@ -124,29 +124,30 @@ export default {
         { title: 'About', icon: 'mdi-help-box', link: '/about' },
         { title: 'Notice Board', icon: 'mdi-note-text', link: '/board' },
         { title: 'User List', icon: 'mdi-account-multiple', link: '/userList' },
+        { title: 'Work List', icon: 'mdi-format-list-checks', link: '/workList' }
       ],
       right: null,
       icons: ['mdi-facebook', 'mdi-twitter', 'mdi-linkedin', 'mdi-instagram'],
-      value: 1,
+      value: 1
     };
   },
   computed: {
-    ...mapState(['screenName', 'isLogin', 'username']),
+    ...mapState(['screenName', 'isLogin', 'username', 'isMobile'])
   },
   methods: {
     ...mapMutations(['mu_loginOut']),
     moveHome() {
       if (this.$route.path === '/') return;
       this.$router.push({
-        path: '/',
+        path: '/'
       });
     },
     moveLogin() {
       if (this.$route.path === '/login') return;
       this.$router.push({
-        path: '/login',
+        path: '/login'
       });
-    },
-  },
+    }
+  }
 };
 </script>

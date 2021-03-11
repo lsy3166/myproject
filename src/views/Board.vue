@@ -40,7 +40,7 @@
         </v-chip>
       </template>
       <template v-slot:body.append>
-        <tr v-if="isMobile === false">
+        <tr v-if="!isMobile">
           <td></td>
           <td></td>
           <td></td>
@@ -84,7 +84,7 @@ export default {
       search: '',
       pointviews: '',
       contentId: '',
-      notices: notices,
+      notices: notices
     };
   },
   computed: {
@@ -95,7 +95,7 @@ export default {
           text: 'Title',
           align: 'start',
           sortable: false,
-          value: 'title',
+          value: 'title'
         },
         { text: 'Content', value: 'content' },
         { text: 'Writer', value: 'writer' },
@@ -106,10 +106,10 @@ export default {
             if (!this.pointviews) return true;
 
             return value < parseInt(this.pointviews);
-          },
-        },
+          }
+        }
       ];
-    },
+    }
   },
   methods: {
     filterOnlyCapsText(value, search) {
@@ -125,7 +125,7 @@ export default {
     },
     write() {
       this.$router.push({
-        path: '/write',
+        path: '/write'
       });
     },
     handleSelection(object) {
@@ -144,7 +144,7 @@ export default {
     dblclickRow(object, row) {
       const index = this.notices.findIndex((notice) => notice.title === row.item.title);
       this.$router.push({
-        path: '/write/' + index,
+        path: '/write/' + index
       });
     },
     deleteContent() {
@@ -155,8 +155,8 @@ export default {
       if (pointviews > 10) return 'red';
       else if (pointviews > 5) return 'orange';
       else return 'green';
-    },
-  },
+    }
+  }
 };
 </script>
 
