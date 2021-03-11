@@ -39,9 +39,9 @@
     <v-app-bar app>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
-      <v-toolbar-title>Application</v-toolbar-title>
+      <v-toolbar-title v-if="!isMobile">Application</v-toolbar-title>
 
-      <v-spacer></v-spacer>
+      <v-spacer v-if="!isMobile"></v-spacer>
 
       <v-toolbar-title v-if="isLogin" class="blue--text">
         {{ username }} 님 환영합니다.
@@ -57,8 +57,10 @@
         >
         <v-icon v-else color="blue darken-2" @click="moveLogin">mdi-account-circle-outline</v-icon>
       </v-btn>
-      <v-toolbar-title v-if="isLogin" @click="mu_loginOut">Log Out</v-toolbar-title>
-      <v-toolbar-title v-else @click="moveLogin">Log In</v-toolbar-title>
+      <template v-if="!isMobile">
+        <v-toolbar-title v-if="isLogin" @click="mu_loginOut">Log Out</v-toolbar-title>
+        <v-toolbar-title v-else @click="moveLogin">Log In</v-toolbar-title>
+      </template>
 
       <!-- <v-btn icon>
         <v-icon color="red darken-2">mdi-heart</v-icon>
