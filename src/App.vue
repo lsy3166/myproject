@@ -125,6 +125,7 @@ export default {
         { title: 'Photos', icon: 'mdi-image', link: '/photo' },
         { title: 'About', icon: 'mdi-help-box', link: '/about' },
         { title: 'Notice Board', icon: 'mdi-note-text', link: '/board' },
+        { title: 'DB Board', icon: 'mdi-database-edit', link: '/dbboard' },
         { title: 'User List', icon: 'mdi-account-multiple', link: '/userList' },
         { title: 'Work List', icon: 'mdi-format-list-checks', link: '/workList' }
       ],
