@@ -64,11 +64,11 @@ export default {
       items: [
         { text: 'E-mail', icon: 'mdi-account' },
         { text: 'Password', icon: 'mdi-lock' },
-        { text: 'Conversions', icon: 'mdi-clock' },
+        { text: 'Conversions', icon: 'mdi-clock' }
       ],
       passwordRules: [
         (value) => !!value || 'Required.',
-        (value) => (value || '').length <= 30 || 'Max 30 characters',
+        (value) => (value || '').length <= 30 || 'Max 30 characters'
       ],
       emailRules: [
         (value) => !!value || 'Required.',
@@ -76,8 +76,8 @@ export default {
         (value) => {
           const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
           return pattern.test(value) || 'Invalid e-mail.';
-        },
-      ],
+        }
+      ]
     };
   },
   computed: {
@@ -88,18 +88,18 @@ export default {
       'isLoginError',
       'successMsg',
       'errorMsg',
-      'useremail',
-    ]),
+      'useremail'
+    ])
   },
   methods: {
     // Shanna@melissa.tv / 2
     login() {
       this.$store.dispatch('ac_login', {
         email: this.email,
-        password: this.password,
+        password: this.password
       });
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -13,7 +13,7 @@ export default {
     this.$store.state.screenName = 'Home';
   },
   components: {
-    HelloWorld,
-  },
+    HelloWorld
+  }
 };
 </script>

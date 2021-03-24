@@ -105,7 +105,7 @@ export default {
       username: null,
       email: null,
       phone: null,
-      website: null,
+      website: null
     };
   },
   computed: {
@@ -128,7 +128,7 @@ export default {
         ' | ' +
         this.user.company.bs
       );
-    },
+    }
   },
   methods: {
     save() {
@@ -142,13 +142,13 @@ export default {
             username: this.username,
             email: this.email,
             phone: this.phone,
-            website: this.website,
+            website: this.website
           },
-          index: index,
+          index: index
         });
       }
       this.$router.push({
-        path: '/userList',
+        path: '/userList'
       });
     },
     clickBtn() {
@@ -156,9 +156,9 @@ export default {
     },
     moveUserList() {
       this.$router.push({
-        path: '/userList',
+        path: '/userList'
       });
-    },
-  },
+    }
+  }
 };
 </script>

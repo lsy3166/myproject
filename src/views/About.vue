@@ -60,9 +60,9 @@ export default {
   data() {
     return {
       model: [],
-      icons: ['mdi-facebook', 'mdi-twitter', 'mdi-linkedin', 'mdi-instagram'],
+      icons: ['mdi-facebook', 'mdi-twitter', 'mdi-linkedin', 'mdi-instagram']
     };
-  },
+  }
 };
 </script>
 

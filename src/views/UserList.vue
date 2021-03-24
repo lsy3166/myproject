@@ -24,23 +24,23 @@ export default {
           text: 'name',
           align: 'start',
           sortable: false,
-          value: 'name',
+          value: 'name'
         },
         { text: 'Username', value: 'username' },
         { text: 'Email', value: 'email' },
         { text: 'Phone', value: 'phone' },
-        { text: 'Website', value: 'website' },
-      ],
+        { text: 'Website', value: 'website' }
+      ]
     };
   },
   methods: {
     dblclickRow(object, row) {
       this.$store.commit('mu_setUser', row.item);
       this.$router.push({
-        path: '/user',
+        path: '/user'
       });
-    },
-  },
+    }
+  }
 };
 </script>
 

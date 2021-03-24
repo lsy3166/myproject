@@ -87,7 +87,7 @@ export default {
       notices: notices,
       titleRules: [(v) => !!v || 'Required.', (v) => v.length <= 50 || 'Max 50 characters'],
       writerRules: [(v) => !!v || 'Required.', (v) => v.length <= 20 || 'Max 20 characters'],
-      contentRules: [(v) => !!v || 'Required.', (v) => v.length <= 200 || 'Max 200 characters'],
+      contentRules: [(v) => !!v || 'Required.', (v) => v.length <= 200 || 'Max 200 characters']
       //wordsRules: [(v) => v.trim().split(' ').length <= 5 || 'Max 5 words'],
     };
   },
@@ -99,7 +99,7 @@ export default {
           title: this.title,
           writer: this.writer,
           content: this.content,
-          pointviews: 1,
+          pointviews: 1
         });
       } else {
         this.notices[this.pContentId].title = this.title;
@@ -108,21 +108,21 @@ export default {
         this.notices[this.pContentId].pointviews = 2;
       }
       this.$router.push({
-        path: '/board',
+        path: '/board'
       });
     },
     moveList() {
       this.$router.push({
-        path: '/board',
+        path: '/board'
       });
     },
     deleteContent() {
       this.notices.splice(this.pContentId, 1);
       this.$router.push({
-        path: '/board',
+        path: '/board'
       });
-    },
-  },
+    }
+  }
 };
 </script>
 
