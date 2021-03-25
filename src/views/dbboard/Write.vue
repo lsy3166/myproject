@@ -42,11 +42,18 @@
 </template>
 
 <script>
+import { api } from '../../helpers/helpers';
 export default {
-  mounted() {
+  async mounted() {
     this.$store.state.screenName = 'DB Board Write';
+    this.boardId = this.$route.params.boardId;
+    const board = await api.getboard(this.boardId);
+    this.title = board.title;
+    this.writer = board.writer;
+    this.email = board.email;
   },
   data: () => ({
+    boardId: null,
     valid: true,
     title: '',
     writer: '',
@@ -64,12 +71,29 @@ export default {
   }),
 
   methods: {
-    submit() {
+    async submit() {
       this.$refs.form.validate();
       let dateTime = new Date();
       const nowtime = `${dateTime.getFullYear()}-${dateTime.getMonth() +
         1}-${dateTime.getDate()} ${dateTime.getHours()}:${dateTime.getMinutes()}:${dateTime.getSeconds()}`;
-      alert(`${this.title}, ${this.email}, ${this.writer}, ${nowtime}`);
+
+      const boards = {
+        title: this.title,
+        email: this.email,
+        writer: this.writer,
+        count: 0,
+        createAt: nowtime
+      };
+      if (this.$route.params.boardId) {
+        await api.updateboard(boards, this.boardId);
+        this.flash('task updated sucessfully!', 'success');
+        this.$router.push(`../`);
+      } else {
+        const res = await api.createboard(boards);
+        this.flash('board created', 'success');
+        console.log(res._id);
+        this.$router.push(`./`);
+      }
     },
     reset() {
       this.$refs.form.reset();

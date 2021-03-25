@@ -48,6 +48,12 @@ const routes = [
     props: true
   },
   {
+    path: '/dbboard/write/:boardId?',
+    name: 'DbBoardWrite',
+    component: () => import(/* webpackChunkName: "dbBoardWrite" */ '../views/dbboard/Write.vue'),
+    props: true
+  },
+  {
     path: '/write/:contentId?',
     name: 'Write',
     component: () => import(/* webpackChunkName: "write" */ '../views/Write.vue'),
