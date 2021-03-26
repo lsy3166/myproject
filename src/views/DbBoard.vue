@@ -8,7 +8,6 @@
       item-key="_id"
       show-select
       class="elevation-1"
-      @click:row="clickRow"
     >
       <template v-slot:top>
         <v-container>
@@ -16,8 +15,11 @@
             <v-row align="center">
               <v-switch v-model="singleSelect" label="Single select" class="pa-3"></v-switch>
               <v-spacer></v-spacer>
-              <v-btn color="primary" dark m-5 @click="createRow">
-                New Item
+              <v-btn color="primary" dark style="margin:5px" @click="createRow">
+                New
+              </v-btn>
+              <v-btn color="red" dark @click="deleteRows">
+                Delete
               </v-btn>
             </v-row>
           </v-card>
@@ -80,8 +82,21 @@ export default {
     createRow() {
       this.$router.push({ path: '/dbboard/write' });
     },
-    clickRow(item) {
+    editItem(item) {
       this.$router.push({ path: '/dbboard/write/' + item._id });
+    },
+    async deleteItem(item) {
+      const sure = window.confirm('Are you sure?');
+      if (!sure) return;
+      await api.deleteboard(item._id);
+      this.flash('deleted sucessfully!', 'success');
+      this.boards = await api.getboards();
+    },
+    async deleteRows() {
+      const sure = window.confirm('Are you sure?');
+      if (!sure) return;
+      await this.selected.forEach((item) => api.deleteboard(item._id));
+      this.boards = await api.getboards();
     }
   }
 };

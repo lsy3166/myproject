@@ -46,11 +46,13 @@ import { api } from '../../helpers/helpers';
 export default {
   async mounted() {
     this.$store.state.screenName = 'DB Board Write';
-    this.boardId = this.$route.params.boardId;
-    const board = await api.getboard(this.boardId);
-    this.title = board.title;
-    this.writer = board.writer;
-    this.email = board.email;
+    if (this.$route.params.boardId) {
+      this.boardId = this.$route.params.boardId;
+      const board = await api.getboard(this.boardId);
+      this.title = board.title;
+      this.writer = board.writer;
+      this.email = board.email;
+    }
   },
   data: () => ({
     boardId: null,

@@ -28,7 +28,7 @@ export const api = {
     return res.data;
   }),
   deleteboard: handleError(async (id) => {
-    const res = await axios.delete(baseURL + id);
+    const res = await axios.delete(baseURL + 'write/' + id);
     return res.data;
   }),
   createboard: handleError(async (payload) => {
