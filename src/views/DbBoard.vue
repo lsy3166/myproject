@@ -26,6 +26,9 @@
         </v-container>
       </template>
       <template v-slot:item.actions="{ item }">
+        <v-icon small class="mr-2" @click="detailItem(item)">
+          mdi-view-list
+        </v-icon>
         <v-icon small class="mr-2" @click="editItem(item)">
           mdi-pencil
         </v-icon>
@@ -97,6 +100,9 @@ export default {
       if (!sure) return;
       await this.selected.forEach((item) => api.deleteboard(item._id));
       this.boards = await api.getboards();
+    },
+    detailItem(item) {
+      console.log(item);
     }
   }
 };
