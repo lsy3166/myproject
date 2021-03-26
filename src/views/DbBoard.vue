@@ -14,41 +14,14 @@
           <v-card flat>
             <v-toolbar height="0px">
               <v-dialog v-model="dialogDelete" max-width="500px">
-                <v-card>
-                  <v-card-title class="headline"
-                    >Are you sure you want to delete these checked items?</v-card-title
-                  >
-                  <v-divider></v-divider>
-                  <v-list class="transparent">
-                    <v-list-item v-for="item in selected" :key="item._id">
-                      <v-list-item-icon>
-                        <v-icon>mdi-circle-small</v-icon>
-                      </v-list-item-icon>
-                      <v-list-item-title>{{ item.title }}</v-list-item-title>
-
-                      <v-list-item-subtitle class="text-right">
-                        {{ item.writer }}
-                      </v-list-item-subtitle>
-                    </v-list-item>
-                  </v-list>
-                  <v-divider></v-divider>
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
-                    <v-btn color="blue darken-1" text @click="deleteItemConfirm">OK</v-btn>
-                    <v-spacer></v-spacer>
-                  </v-card-actions>
-                </v-card>
+                <dialog-delete
+                  @close-delete="closeDelete"
+                  @delete-itemConfirm="deleteItemConfirm"
+                  :selected="selected"
+                ></dialog-delete>
               </v-dialog>
               <v-dialog v-model="dialogDetail" max-width="500px">
-                <v-card>
-                  <v-card-title class="headline">Detail</v-card-title>
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn color="blue darken-1" text @click="closeDetail">Close</v-btn>
-                    <v-spacer></v-spacer>
-                  </v-card-actions>
-                </v-card>
+                <dialog-detail @close-detail="closeDetail" :item="item"></dialog-detail>
               </v-dialog>
             </v-toolbar>
             <v-row align="center">
@@ -86,7 +59,13 @@
 
 <script>
 import { api } from '../helpers/helpers';
+import DialogDelete from './dbboard/DialogDelete.vue';
+import DialogDetail from './dbboard/DialogDetail.vue';
 export default {
+  components: {
+    DialogDetail,
+    DialogDelete
+  },
   async mounted() {
     this.$store.state.screenName = 'DB Board';
     this.boards = await api.getboards();
@@ -97,6 +76,7 @@ export default {
       dialogDelete: false,
       dialogDetail: false,
       selected: [],
+      item: null,
       headers: [
         {
           text: '번호',
@@ -130,9 +110,6 @@ export default {
   watch: {
     dialogDelete(val) {
       val || this.closeDelete();
-    },
-    dialogDetail(val) {
-      val || this.closeDetail();
     }
   },
   methods: {
@@ -159,6 +136,7 @@ export default {
     async detailItem(item) {
       item.count += 1;
       await api.updateboard(item, item._id);
+      this.item = item;
       this.dialogDetail = true;
     },
     getColor(calories) {
@@ -166,15 +144,9 @@ export default {
       else if (calories > 5) return 'orange';
       else return 'green';
     },
-    deleteItemConfirm() {
-      // this.desserts.splice(this.editedIndex, 1);
-      this.closeDelete();
-      this.$nextTick(() => {
-        this.deleteForEach();
-      });
-    },
-    async deleteForEach() {
-      await this.selected.forEach((item) => api.deleteboard(item._id));
+    async deleteItemConfirm() {
+      await this.selected.forEach(async (item) => await api.deleteboard(item._id));
+      await this.closeDelete();
       this.boards = await api.getboards();
     },
     closeDelete() {
