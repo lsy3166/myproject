@@ -124,8 +124,9 @@ export default {
     deleteRows() {
       this.dialogDelete = true;
     },
-    detailItem(item) {
-      console.log(item);
+    async detailItem(item) {
+      item.count += 1;
+      await api.updateboard(item, item._id);
     },
     getColor(calories) {
       if (calories > 10) return 'red';
