@@ -10,6 +10,21 @@
       class="elevation-1"
     >
       <template v-slot:top>
+        <v-toolbar>
+          <v-dialog v-model="dialogDelete" max-width="500px">
+            <v-card>
+              <v-card-title class="headline"
+                >Are you sure you want to delete these checked items?</v-card-title
+              >
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
+                <v-btn color="blue darken-1" text @click="deleteItemConfirm">OK</v-btn>
+                <v-spacer></v-spacer>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </v-toolbar>
         <v-container>
           <v-card flat>
             <v-row align="center">
@@ -36,6 +51,11 @@
           mdi-delete
         </v-icon>
       </template>
+      <template v-slot:item.count="{ item }">
+        <v-chip :color="getColor(item.count)" dark>
+          {{ item.count }}
+        </v-chip>
+      </template>
     </v-data-table>
   </v-container>
 </template>
@@ -50,6 +70,7 @@ export default {
   data() {
     return {
       singleSelect: false,
+      dialogDelete: false,
       selected: [],
       headers: [
         {
@@ -81,6 +102,11 @@ export default {
       boards: []
     };
   },
+  watch: {
+    dialogDelete(val) {
+      val || this.closeDelete();
+    }
+  },
   methods: {
     createRow() {
       this.$router.push({ path: '/dbboard/write' });
@@ -95,14 +121,30 @@ export default {
       this.flash('deleted sucessfully!', 'success');
       this.boards = await api.getboards();
     },
-    async deleteRows() {
-      const sure = window.confirm('Are you sure?');
-      if (!sure) return;
-      await this.selected.forEach((item) => api.deleteboard(item._id));
-      this.boards = await api.getboards();
+    deleteRows() {
+      this.dialogDelete = true;
     },
     detailItem(item) {
       console.log(item);
+    },
+    getColor(calories) {
+      if (calories > 10) return 'red';
+      else if (calories > 5) return 'orange';
+      else return 'green';
+    },
+    deleteItemConfirm() {
+      // this.desserts.splice(this.editedIndex, 1);
+      this.closeDelete();
+      this.$nextTick(() => {
+        this.deleteForEach();
+      });
+    },
+    async deleteForEach() {
+      await this.selected.forEach((item) => api.deleteboard(item._id));
+      this.boards = await api.getboards();
+    },
+    closeDelete() {
+      this.dialogDelete = false;
     }
   }
 };
