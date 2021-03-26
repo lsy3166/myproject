@@ -37,6 +37,13 @@
           </v-card>
         </v-container>
       </template>
+      <template v-slot:item.title="{ item }">
+        <v-card-actions @click="clickTitle(item)" style="margin:0px;padding:0px">
+          <v-btn text color="teal accent-4" style="margin:0px;padding:0px" @click="reveal = false">
+            {{ item.title }}
+          </v-btn>
+        </v-card-actions>
+      </template>
       <template v-slot:item.actions="{ item }">
         <v-icon small class="mr-2" @click="detailItem(item)">
           mdi-view-list
@@ -80,7 +87,7 @@ export default {
       headers: [
         {
           text: '번호',
-          align: 'start',
+          align: 'center',
           sortable: false,
           value: 'seq',
           class: 'indigo darken-2 lime--text text--lighten-3'
@@ -92,10 +99,20 @@ export default {
         //   value: '_id',
         //   class: 'indigo darken-2 lime--text text--lighten-3'
         // },
-        { text: '제목', value: 'title', class: 'indigo darken-2 lime--text text--lighten-3' },
+        {
+          text: '제목',
+          value: 'title',
+          class: 'indigo darken-2 lime--text text--lighten-3',
+          align: 'start'
+        },
         { text: 'e-mail', value: 'email', class: 'indigo darken-2 lime--text text--lighten-3' },
         { text: '글쓴이', value: 'writer', class: 'indigo darken-2 lime--text text--lighten-3' },
-        { text: '조회수', value: 'count', class: 'indigo darken-2 lime--text text--lighten-3' },
+        {
+          text: '조회수',
+          value: 'count',
+          class: 'indigo darken-2 lime--text text--lighten-3',
+          align: 'center'
+        },
         { text: '게시일', value: 'createAt', class: 'indigo darken-2 lime--text text--lighten-3' },
         {
           text: 'Actions',
@@ -154,6 +171,9 @@ export default {
     },
     closeDetail() {
       this.dialogDetail = false;
+    },
+    clickTitle(item) {
+      this.detailItem(item);
     }
   }
 };
