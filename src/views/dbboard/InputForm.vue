@@ -86,11 +86,17 @@ export default {
       const nowtime = `${dateTime.getFullYear()}-${dateTime.getMonth() +
         1}-${dateTime.getDate()} ${dateTime.getHours()}:${dateTime.getMinutes()}:${dateTime.getSeconds()}`;
 
-      const boards = {
+      const boards_create = {
         title: this.title,
         email: this.email,
         writer: this.writer,
         count: 0,
+        createAt: nowtime
+      };
+      const boards = {
+        title: this.title,
+        email: this.email,
+        writer: this.writer,
         createAt: nowtime
       };
       if (this.$route.params.boardId) {
@@ -98,7 +104,7 @@ export default {
         this.flash('task updated sucessfully!', 'success');
         this.$router.push(`../`);
       } else {
-        const res = await api.createboard(boards);
+        const res = await api.createboard(boards_create);
         this.flash('board created', 'success');
         console.log(res._id);
         this.$router.push(`./`);

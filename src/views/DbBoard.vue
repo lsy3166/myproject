@@ -39,7 +39,13 @@
       </template>
       <template v-slot:item.title="{ item }">
         <v-card-actions @click="clickTitle(item)" style="margin:0px;padding:0px">
-          <v-btn text color="teal accent-4" style="margin:0px;padding:0px" @click="reveal = false">
+          <v-btn
+            text
+            color="teal darken-3 accent-4"
+            style="margin:0px;padding:0px"
+            class="font-weight-bold text-decoration-underline font-italic"
+            @click="reveal = false"
+          >
             {{ item.title }}
           </v-btn>
         </v-card-actions>
@@ -165,6 +171,7 @@ export default {
       await this.selected.forEach(async (item) => await api.deleteboard(item._id));
       await this.closeDelete();
       this.boards = await api.getboards();
+      this.selected = [];
     },
     closeDelete() {
       this.dialogDelete = false;
