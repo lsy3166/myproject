@@ -8,6 +8,8 @@
       item-key="_id"
       show-select
       class="elevation-1"
+      :loading="loading"
+      loading-text="Loading... Please wait"
     >
       <template v-slot:top>
         <v-container>
@@ -79,15 +81,20 @@ export default {
     DialogDetail,
     DialogDelete
   },
-  async mounted() {
+  mounted() {
     this.$store.state.screenName = 'DB Board';
-    this.boards = await api.getboards();
+
+    setTimeout(async () => {
+      this.boards = await api.getboards();
+      this.loading = false;
+    }, 2000);
   },
   data() {
     return {
       singleSelect: false,
       dialogDelete: false,
       dialogDetail: false,
+      loading: true,
       selected: [],
       item: null,
       headers: [
