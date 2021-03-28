@@ -87,7 +87,7 @@ export default {
     setTimeout(async () => {
       this.boards = await api.getboards();
       this.loading = false;
-    }, 2000);
+    }, 1000);
   },
   data() {
     return {
