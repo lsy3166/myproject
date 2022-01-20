@@ -11,8 +11,8 @@ Vue.use(VueFlashMessage, {
 });
 
 const vm = new Vue();
-const baseURL = 'http://localhost:3000/dbboard/';
-// const baseURL = 'http://192.168.219.102:3000/dbboard/';
+const baseURL = 'http://localhost:3001/dbboard/';
+// const baseURL = 'http://192.168.219.102:3001/dbboard/';
 
 const handleError = (fn) => (...params) =>
   fn(...params).catch((error) => {
